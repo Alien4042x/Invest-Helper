@@ -8,8 +8,8 @@ using System.Linq;
 using System.Security.Policy;
 using CoreServices;
 using System.IO;
-using System.Windows;
 using ClosedXML.Excel;
+using System.Windows;
 using System.Reflection;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -180,75 +180,86 @@ namespace InvestHelper
 
         private async void Excel_Parameters(string selectedPath)
         {
-            GetData data = new GetData(this);
-            await data.cash_flow();
-
-            var assembly = IntrospectionExtensions.GetTypeInfo(typeof(InvestHelper.ViewController)).Assembly;
-            Stream stream = assembly.GetManifestResourceStream("InvestHelper.Resources.table.xlsx");
-            using (var workbook = new XLWorkbook(stream))
+            try
             {
-                var worksheet = workbook.Worksheet("Sheet1");
+                GetData data = new GetData(this);
+                await data.cash_flow();
 
-                //Rename
-                worksheet.Name = string.Format("DCF - {0}",stock.StringValue);
+                //var assembly = IntrospectionExtensions.GetTypeInfo(typeof(InvestHelper.ViewController)).Assembly;
 
-                //Date Update
-                worksheet.Cell("C6").Value = data.years[0];
-                worksheet.Cell("D6").Value = data.years[1];
-                worksheet.Cell("E6").Value = data.years[2];
-                worksheet.Cell("F6").Value = data.years[3];
-
-                //Growth Rate
-                if (growth_rate.StringValue.Contains('.'))
-                    growth_rate.StringValue = growth_rate.StringValue.Replace('.', ',');
-
-                worksheet.Cell("M6").Value = growth_rate.StringValue;
-
-                //Perpertual Growth Rate
-                if (perpertual_growth_rate.StringValue.Contains('.'))
-                    perpertual_growth_rate.StringValue = perpertual_growth_rate.StringValue.Replace('.', ',');
-
-                worksheet.Cell("M8").Value = perpertual_growth_rate.StringValue;
-
-                //Discount Rate
-                if (discount_rate.StringValue.Contains('.'))
-                    discount_rate.StringValue = discount_rate.StringValue.Replace('.', ',');
-
-                worksheet.Cell("M9").Value = discount_rate.StringValue;
-
-                // Start at cell C13
-                int startColumn = 3; // Column C
-                int row = 13; // Row 13
-
-                for (int year = data.years[3]; year <= 8; year++)
+                //Stream stream = assembly.GetManifestResourceStream("InvestHelper.Resources.table.xlsx");
+                using (FileStream stream = File.Open(Environment.CurrentDirectory + "/table.xlsx", FileMode.Open, FileAccess.Read))
                 {
-                    // Write the year into the cell
-                    worksheet.Cell(row, startColumn).Value = year;
+                    using (var workbook = new XLWorkbook(stream))
+                    {
+                        var worksheet = workbook.Worksheet("Sheet1");
 
-                    // Move to the next column
-                    startColumn++;
+                        //Rename
+                        worksheet.Name = string.Format("DCF - {0}", stock.StringValue);
+
+                        //Date Update
+                        worksheet.Cell("C6").Value = data.years[0];
+                        worksheet.Cell("D6").Value = data.years[1];
+                        worksheet.Cell("E6").Value = data.years[2];
+                        worksheet.Cell("F6").Value = data.years[3];
+
+                        //Growth Rate
+                        if (growth_rate.StringValue.Contains('.'))
+                            growth_rate.StringValue = growth_rate.StringValue.Replace('.', ',');
+
+                        worksheet.Cell("M6").Value = growth_rate.StringValue;
+
+                        //Perpertual Growth Rate
+                        if (perpertual_growth_rate.StringValue.Contains('.'))
+                            perpertual_growth_rate.StringValue = perpertual_growth_rate.StringValue.Replace('.', ',');
+
+                        worksheet.Cell("M8").Value = perpertual_growth_rate.StringValue;
+
+                        //Discount Rate
+                        if (discount_rate.StringValue.Contains('.'))
+                            discount_rate.StringValue = discount_rate.StringValue.Replace('.', ',');
+
+                        worksheet.Cell("M9").Value = discount_rate.StringValue;
+
+                        // Start at cell C13
+                        int startColumn = 3; // Column C
+                        int row = 13; // Row 13
+
+                        for (int year = data.years[3]; year <= 8; year++)
+                        {
+                            // Write the year into the cell
+                            worksheet.Cell(row, startColumn).Value = year;
+
+                            // Move to the next column
+                            startColumn++;
+                        }
+
+                        //Stock
+                        worksheet.Cell("A2").Value = stock.StringValue;
+
+                        //Free cash flow
+                        worksheet.Cell("C7").Value = data.freeCashFlowValues[0];
+                        worksheet.Cell("D7").Value = data.freeCashFlowValues[1];
+                        worksheet.Cell("E7").Value = data.freeCashFlowValues[2];
+                        worksheet.Cell("F7").Value = data.freeCashFlowValues[3];
+
+                        //Cash & Cash Equivalents
+                        worksheet.Cell("C19").Value = data.cash_cash_equivalents;
+
+                        //Total Debt
+                        worksheet.Cell("C20").Value = data.total_debt;
+
+                        //Shares Outstanding
+                        worksheet.Cell("C22").Value = data.shares_outstanding;
+
+                        //Save
+                        workbook.SaveAs(selectedPath);
+                    }
                 }
-
-                //Stock
-                worksheet.Cell("A2").Value = stock.StringValue;
-
-                //Free cash flow
-                worksheet.Cell("C7").Value = data.freeCashFlowValues[0];
-                worksheet.Cell("D7").Value = data.freeCashFlowValues[1];
-                worksheet.Cell("E7").Value = data.freeCashFlowValues[2];
-                worksheet.Cell("F7").Value = data.freeCashFlowValues[3];
-
-                //Cash & Cash Equivalents
-                worksheet.Cell("C19").Value = data.cash_cash_equivalents;
-
-                //Total Debt
-                worksheet.Cell("C20").Value = data.total_debt;
-
-                //Shares Outstanding
-                worksheet.Cell("C22").Value = data.shares_outstanding;
-
-                //Save
-                workbook.SaveAs(selectedPath);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
 
