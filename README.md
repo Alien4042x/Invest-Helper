@@ -7,7 +7,6 @@ The application generate DCF-model with all values
 If you encounter any bugs or issues, please report them by creating a new issue in this GitHub repository. Provide as much detail as possible to help us understand and resolve the problem.
 </br>
 # User Guide
-</br>
 # Custom Value Adjustments
 The orange fields in the application are designed for adjusting custom values. If you wish to modify specific values according to your needs, simply click on the orange field and enter the desired value.
 </br>
