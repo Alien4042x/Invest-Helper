@@ -6,11 +6,11 @@ The application generate DCF-model with all values
 # Reporting Bugs
 If you encounter any bugs or issues, please report them by creating a new issue in this GitHub repository. Provide as much detail as possible to help us understand and resolve the problem.
 </br>
-# User Guide
-# Custom Value Adjustments
+## User Guide
+### Custom Value Adjustments
 The orange fields in the application are designed for adjusting custom values. If you wish to modify specific values according to your needs, simply click on the orange field and enter the desired value.
 </br>
-# Generating Data with Empty Fields
+### Generating Data with Empty Fields
 When generating data, the `user-growth rate` and `user-discount rate` fields can be left empty. The application is designed to handle and process the data correctly even if these values are not provided.
 </br>
 # Disclaimer
