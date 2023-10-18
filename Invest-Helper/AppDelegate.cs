@@ -20,6 +20,12 @@ namespace InvestHelper
 			// Insert code here to tear down your application
 		}
 
+        [Export("applicationSupportsSecureRestorableState:")]
+        public bool ApplicationSupportsSecureRestorableState(NSApplication app)
+        {
+            return true;
+        }
+
         public override bool ApplicationShouldTerminateAfterLastWindowClosed(NSApplication sender)
         {
             return true;

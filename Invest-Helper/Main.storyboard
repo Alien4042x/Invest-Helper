@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -707,23 +707,11 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="705" height="181"/>
+                        <rect key="frame" x="0.0" y="0.0" width="705" height="183"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fUb-eq-tj7">
-                                <rect key="frame" x="160" y="116" width="129" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="8,0%" drawsBackground="YES" id="Nxd-Vf-woI">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <action selector="growth_rate_textbox:" target="XfG-lQ-9wD" id="hDs-4a-w3R"/>
-                                </connections>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QwM-m3-cWS">
-                                <rect key="frame" x="111" y="145" width="43" height="16"/>
+                                <rect key="frame" x="117" y="147" width="43" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Stock:" id="aOP-D1-T6j">
                                     <font key="font" metaFont="system"/>
@@ -732,7 +720,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wS7-3i-meI">
-                                <rect key="frame" x="160" y="142" width="129" height="21"/>
+                                <rect key="frame" x="166" y="144" width="129" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Example: AAPL" drawsBackground="YES" id="Xnh-vR-ItT">
                                     <font key="font" metaFont="system"/>
@@ -743,59 +731,8 @@
                                     <action selector="stock_textbox:" target="XfG-lQ-9wD" id="2kX-T8-6e5"/>
                                 </connections>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u8W-lv-VdP">
-                                <rect key="frame" x="71" y="119" width="83" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Growth Rate:" id="yYf-Q9-gG1">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hLG-bL-fPg">
-                                <rect key="frame" x="556" y="145" width="129" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="2,50%" drawsBackground="YES" id="5F2-M7-LA4">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <action selector="perpertual_growth_rate_textbox:" target="XfG-lQ-9wD" id="jyT-bq-uZh"/>
-                                </connections>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f1T-z1-rBi">
-                                <rect key="frame" x="400" y="145" width="150" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Perpertual Growth Rate:" id="TzX-jd-ijp">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T1k-lS-yjc">
-                                <rect key="frame" x="556" y="116" width="129" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="8,0%" drawsBackground="YES" id="opk-aO-CGv">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <action selector="discount_rate_textbox:" target="XfG-lQ-9wD" id="gOL-zv-Ov1"/>
-                                </connections>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U3I-R3-8z1">
-                                <rect key="frame" x="457" y="119" width="93" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="Discount Rate:" id="iwe-GF-c2A">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PK2-HO-BsT">
-                                <rect key="frame" x="570" y="16" width="101" height="40"/>
+                                <rect key="frame" x="587" y="8" width="101" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="bevel" title="Generate" bezelStyle="regularSquare" alignment="center" borderStyle="border" inset="2" id="KDw-B2-9Ma">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -807,7 +744,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O1U-b0-4nS">
-                                <rect key="frame" x="20" y="20" width="147" height="16"/>
+                                <rect key="frame" x="8" y="20" width="147" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Program by Alien4042x" id="eYj-Kb-HDk">
                                     <font key="font" metaFont="system"/>
@@ -816,50 +753,139 @@
                                 </textFieldCell>
                             </textField>
                             <progressIndicator fixedFrame="YES" maxValue="100" doubleValue="65" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="nKg-rM-tHT">
-                                <rect key="frame" x="516" y="20" width="32" height="32"/>
+                                <rect key="frame" x="541" y="12" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </progressIndicator>
                             <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yo5-Bu-qWC">
-                                <rect key="frame" x="73" y="137" width="32" height="32"/>
+                                <rect key="frame" x="79" y="139" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSCaution" id="klb-0O-l1o"/>
                                 <connections>
                                     <action selector="stock_icon:" target="XfG-lQ-9wD" id="F4T-0i-CBg"/>
                                 </connections>
                             </imageView>
-                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Ex-UA-7uq">
-                                <rect key="frame" x="33" y="111" width="32" height="32"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RGP-iW-qi6">
+                                <rect key="frame" x="486" y="69" width="141" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSCaution" id="vFR-Rq-zJt"/>
-                                <connections>
-                                    <action selector="growth_rate_icon:" target="XfG-lQ-9wD" id="UvK-au-HR8"/>
-                                </connections>
-                            </imageView>
-                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wTF-0Y-OcQ">
-                                <rect key="frame" x="419" y="111" width="32" height="32"/>
+                                <buttonCell key="cell" type="check" title="Classified as REIT?" bezelStyle="regularSquare" imagePosition="left" transparent="YES" inset="2" id="4Hv-ux-OfG">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VJH-ic-haM">
+                                <rect key="frame" x="8" y="69" width="184" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSCaution" id="NLB-a9-gij"/>
+                                <buttonCell key="cell" type="check" title="Use Analytical Predictions" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Ybz-aj-CAh">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
                                 <connections>
-                                    <action selector="discount_rate_icon:" target="XfG-lQ-9wD" id="6Ba-Yw-ks5"/>
+                                    <action selector="use_analytical_predictions:" target="XfG-lQ-9wD" id="IN4-2b-l4s"/>
                                 </connections>
-                            </imageView>
+                            </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WpS-bR-IYw">
+                                <rect key="frame" x="556" y="107" width="129" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Vu5-E4-6dw">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="user_discount_rate_textbox:" target="XfG-lQ-9wD" id="N13-qf-y9P"/>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="emW-mC-2yV">
+                                <rect key="frame" x="423" y="110" width="127" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="User-Discount Rate:" id="ftY-1T-RSW">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f1T-z1-rBi">
+                                <rect key="frame" x="400" y="147" width="150" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Perpertual Growth Rate:" id="TzX-jd-ijp">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ji5-JH-9Lb">
-                                <rect key="frame" x="362" y="137" width="32" height="32"/>
+                                <rect key="frame" x="362" y="139" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSCaution" id="3VA-8E-3et"/>
                                 <connections>
                                     <action selector="perpertual_growth_rate_icon:" target="XfG-lQ-9wD" id="DQJ-Gf-zju"/>
                                 </connections>
                             </imageView>
+                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D3B-gX-E95">
+                                <rect key="frame" x="11" y="102" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSCaution" id="Gmw-4C-PqT"/>
+                                <connections>
+                                    <action selector="user_growth_rate_icon:" target="XfG-lQ-9wD" id="PL3-8i-70U"/>
+                                </connections>
+                            </imageView>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hYX-zS-f4y">
+                                <rect key="frame" x="198" y="69" width="278" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Use Conservative Rounding(Growth Rate)" bezelStyle="regularSquare" imagePosition="left" inset="2" id="B1F-j5-glA">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="conservative_rounds_checkbox:" target="XfG-lQ-9wD" id="Ksl-oL-QCZ"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hLG-bL-fPg">
+                                <rect key="frame" x="556" y="144" width="129" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="2.50%" drawsBackground="YES" id="5F2-M7-LA4">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="perpertual_growth_rate_textbox:" target="XfG-lQ-9wD" id="jyT-bq-uZh"/>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u8W-lv-VdP">
+                                <rect key="frame" x="43" y="110" width="117" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="User-Growth Rate:" id="yYf-Q9-gG1">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cl8-u3-eLs">
+                                <rect key="frame" x="166" y="107" width="129" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="MSl-vL-ymt">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="user_growth_rate_textbox_action:" target="XfG-lQ-9wD" id="FCY-Ya-or9"/>
+                                </connections>
+                            </textField>
+                            <imageView hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RPK-iU-wGs">
+                                <rect key="frame" x="375" y="102" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSCaution" id="hOR-AI-Exp"/>
+                                <connections>
+                                    <action selector="discount_rate_icon:" target="XfG-lQ-9wD" id="miw-P3-A4a"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="btn_generate_click" destination="PK2-HO-BsT" id="3VA-0s-sCS"/>
-                        <outlet property="discount_rate" destination="T1k-lS-yjc" id="yws-zv-3zv"/>
-                        <outlet property="discount_rate_icon" destination="wTF-0Y-OcQ" id="lTO-Pz-uYw"/>
-                        <outlet property="grow_rate" destination="fUb-eq-tj7" id="KP2-eP-Shq"/>
-                        <outlet property="growth_rate" destination="fUb-eq-tj7" id="ozu-z7-D99"/>
-                        <outlet property="growth_rate_icon" destination="6Ex-UA-7uq" id="OOl-Sm-9Lu"/>
+                        <outlet property="conservative_rounding" destination="hYX-zS-f4y" id="OLz-fn-xZJ"/>
                         <outlet property="perpertual_growth_rate" destination="hLG-bL-fPg" id="ROL-i9-Dwe"/>
                         <outlet property="perpertual_growth_rate_icon" destination="Ji5-JH-9Lb" id="jfy-w4-rKl"/>
                         <outlet property="progress_indicator" destination="nKg-rM-tHT" id="ID6-cZ-uQN"/>
@@ -868,11 +894,19 @@
                         <outlet property="stock_box" destination="wS7-3i-meI" id="THm-c2-N4b"/>
                         <outlet property="stock_icon" destination="Yo5-Bu-qWC" id="H7A-Dz-08d"/>
                         <outlet property="stock_textbox" destination="wS7-3i-meI" id="Ea2-IL-9rW"/>
+                        <outlet property="use_analytical_predictions_checkbox" destination="VJH-ic-haM" id="hsz-Gg-HLs"/>
+                        <outlet property="user_discount_rate" destination="WpS-bR-IYw" id="jxe-Lt-jNb"/>
+                        <outlet property="user_growth_rate" destination="cl8-u3-eLs" id="tqG-SX-dcC"/>
+                        <outlet property="user_growth_rate_icon" destination="D3B-gX-E95" id="N09-bw-Qcp"/>
+                        <outlet property="user_growth_rate_textbox" destination="cl8-u3-eLs" id="bSC-rS-N7p"/>
+                        <outlet property="user_growth_rate_textbox_action" destination="cl8-u3-eLs" id="kvw-DM-xpd"/>
+                        <outlet property="user_growth_rate_textbox_ns" destination="cl8-u3-eLs" id="Gux-7F-US9"/>
+                        <outlet property="user_growth_textbox" destination="cl8-u3-eLs" id="qF4-dK-nlh"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="103.5" y="707.5"/>
+            <point key="canvasLocation" x="103.5" y="708.5"/>
         </scene>
     </scenes>
     <resources>
