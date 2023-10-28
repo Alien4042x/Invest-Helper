@@ -21,13 +21,14 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using CoreFoundation;
 using System.Globalization;
 using System.Security.Cryptography;
+using System.Net;
+using CoreAudioKit;
+using CoreVideo;
 
 namespace InvestHelper
 {
     public partial class ViewController : NSViewController
     {
-        private bool isProcessing = false;
-
         public ViewController(IntPtr handle) : base(handle)
         {
         }
@@ -128,30 +129,6 @@ namespace InvestHelper
             return allFieldsFilled;
         }
 
-        public async void UpdateProgressBar(double value)
-        {
-            if (!isProcessing) return;
-
-            InvokeOnMainThread(() =>
-            {
-                progress_indicator.DoubleValue = value;
-            });
-
-            if (progress_indicator.DoubleValue >= 100)
-            {
-                await Task.Delay(3000); // Wait for 3 second
-
-                InvokeOnMainThread(() =>
-                {
-                    progress_indicator.Hidden = true;
-                    progress_indicator.DoubleValue = 0;
-                    btn_generate_click.Enabled = true;
-                });
-
-                isProcessing = false;
-            }
-        }
-
         public void SaveDataToExcel()
         {
             var savePanel = new NSSavePanel();
@@ -164,12 +141,10 @@ namespace InvestHelper
             {
                 var selectedPath = savePanel.Url.Path;
 
-                isProcessing = true;
+                //ProgressManager.IsProcessing = true;
 
                 progress_indicator.Hidden = false;
                 btn_generate_click.Enabled = false;
-
-                UpdateProgressBar(0);
 
                 user_growth_rate_textbox.Window.MakeFirstResponder(null);
                 user_discount_rate.Window.MakeFirstResponder(null);
@@ -221,7 +196,8 @@ namespace InvestHelper
 
                 GetData data = new GetData(this);
 
-                await data.free_cash_flow();
+                await data.DownloadAllData();
+                //await data.free_cash_flow();
 
                 //var assembly = IntrospectionExtensions.GetTypeInfo(typeof(InvestHelper.ViewController)).Assembly;
 
@@ -238,16 +214,16 @@ namespace InvestHelper
                         //Date Update Free Cash Flow
                         if (data.years.Count >= 10)
                         {
-                            worksheet.Cell("B5").Value = data.years[0];
-                            worksheet.Cell("C5").Value = data.years[1];
-                            worksheet.Cell("D5").Value = data.years[2];
-                            worksheet.Cell("E5").Value = data.years[3];
-                            worksheet.Cell("F5").Value = data.years[4];
-                            worksheet.Cell("G5").Value = data.years[5];
-                            worksheet.Cell("H5").Value = data.years[6];
-                            worksheet.Cell("I5").Value = data.years[7];
-                            worksheet.Cell("J5").Value = data.years[8];
-                            worksheet.Cell("K5").Value = data.years[9];
+                            worksheet.Cell("C35").Value = data.years[0];
+                            worksheet.Cell("D35").Value = data.years[1];
+                            worksheet.Cell("E35").Value = data.years[2];
+                            worksheet.Cell("F35").Value = data.years[3];
+                            worksheet.Cell("G35").Value = data.years[4];
+                            worksheet.Cell("H35").Value = data.years[5];
+                            worksheet.Cell("I35").Value = data.years[6];
+                            worksheet.Cell("J35").Value = data.years[7];
+                            worksheet.Cell("K35").Value = data.years[8];
+                            worksheet.Cell("L35").Value = data.years[9];
                         }
                         else
                         {
@@ -255,20 +231,20 @@ namespace InvestHelper
                         }
 
                         //Free cash flow
-                        worksheet.Cell("B6").Value = data.freeCashFlowValues[0];
-                        worksheet.Cell("C6").Value = data.freeCashFlowValues[1];
-                        worksheet.Cell("D6").Value = data.freeCashFlowValues[2];
-                        worksheet.Cell("E6").Value = data.freeCashFlowValues[3];
-                        worksheet.Cell("F6").Value = data.freeCashFlowValues[4];
-                        worksheet.Cell("G6").Value = data.freeCashFlowValues[5];
-                        worksheet.Cell("H6").Value = data.freeCashFlowValues[6];
-                        worksheet.Cell("I6").Value = data.freeCashFlowValues[7];
-                        worksheet.Cell("J6").Value = data.freeCashFlowValues[8];
-                        worksheet.Cell("K6").Value = data.freeCashFlowValues[9];
+                        worksheet.Cell("C36").Value = data.freeCashFlowValues[0];
+                        worksheet.Cell("D36").Value = data.freeCashFlowValues[1];
+                        worksheet.Cell("E36").Value = data.freeCashFlowValues[2];
+                        worksheet.Cell("F36").Value = data.freeCashFlowValues[3];
+                        worksheet.Cell("G36").Value = data.freeCashFlowValues[4];
+                        worksheet.Cell("H36").Value = data.freeCashFlowValues[5];
+                        worksheet.Cell("I36").Value = data.freeCashFlowValues[6];
+                        worksheet.Cell("J36").Value = data.freeCashFlowValues[7];
+                        worksheet.Cell("K36").Value = data.freeCashFlowValues[8];
+                        worksheet.Cell("L36").Value = data.freeCashFlowValues[9];
 
                         // Date Update for Future Free Cash Flow
-                        int startColumn = 2; // Starting at Column B
-                        int row = 9; // Starting at Row 10
+                        int startColumn = 3; // Starting at Column C
+                        int row = 40; // Starting at Row 40
 
                         int currentYear = DateTime.Now.Year; // Get the current year
 
@@ -293,7 +269,7 @@ namespace InvestHelper
                                 finalGrowthRate = Math.Round(finalGrowthRate, 2); // Round to two decimal places (or whatever precision you prefer)
                             }
 
-                            worksheet.Cell("P6").Value = finalGrowthRate;
+                            worksheet.Cell("G25").Value = finalGrowthRate;
                         }
 
                         //User Growth Rate
@@ -308,7 +284,7 @@ namespace InvestHelper
                                     user_growth_rate_value = Math.Round(user_growth_rate_value, 2);
                                 }
 
-                                worksheet.Cell("P5").Value = user_growth_rate_value / 100;
+                                worksheet.Cell("G24").Value = user_growth_rate_value / 100;
                             }
                         }
 
@@ -319,7 +295,7 @@ namespace InvestHelper
                         double perpertual_growth_rate_value;
                         if (double.TryParse(perpertual_growth_rate.StringValue, out perpertual_growth_rate_value))
                         {
-                            worksheet.Cell("P9").Value = perpertual_growth_rate_value;
+                            worksheet.Cell("K23").Value = perpertual_growth_rate_value;
                         }
 
                         //User Discount Rate
@@ -329,52 +305,87 @@ namespace InvestHelper
 
                             if (double.TryParse(cleanedValue, out double user_discount_rate_value))
                             {
-                                worksheet.Cell("P11").Value = user_discount_rate_value / 100;
+                                worksheet.Cell("K25").Value = user_discount_rate_value / 100;
                             }
                         }
 
                         //Stock
-                        worksheet.Cell("A2").Value = stock.StringValue;
+                        worksheet.Cell("E6").Value = stock.StringValue;
 
                         //Cash & Cash Equivalents
-                        worksheet.Cell("B14").Value = data.cash_cash_equivalents;
+                        worksheet.Cell("C22").Value = data.cash_cash_equivalents;
 
                         //Total Debt
-                        worksheet.Cell("B15").Value = data.total_debt;
+                        worksheet.Cell("G12").Value = data.total_debt;
 
                         //Shares Outstanding
-                        worksheet.Cell("B17").Value = data.shares_outstanding;
+                        worksheet.Cell("G21").Value = data.shares_outstanding;
 
                         //Interest Expense
-                        worksheet.Cell("O14").Value = data.interest_expense;
+                        worksheet.Cell("G11").Value = data.interest_expense;
 
                         //Income Tax Expense
-                        worksheet.Cell("O17").Value = data.income_tax_expense;
+                        worksheet.Cell("G14").Value = data.income_tax_expense;
 
                         //Income Before Tax
-                        worksheet.Cell("O18").Value = data.income_before_tax;
+                        worksheet.Cell("G15").Value = data.income_before_tax;
 
                         //Risk Free Rate
-                        worksheet.Cell("K14").Value = data.t_yeald_x_years;
+                        worksheet.Cell("C11").Value = data.t_yeald_x_years;
 
                         //Market Cap
-                        worksheet.Cell("J22").Value = data.market_cap;
+                        worksheet.Cell("B27").Value = data.market_cap;
 
                         //BETA
-                        worksheet.Cell("K15").Value = data.beta;
+                        worksheet.Cell("C12").Value = data.beta;
 
                         //Market Return
-                        worksheet.Cell("K16").Value = data.return_rate;
+                        worksheet.Cell("C13").Value = data.return_rate;
 
                         //EPS
-                        worksheet.Cell("F13").Value = data.eps;
+                        worksheet.Cell("C20").Value = data.eps;
+
+                        //PE
+                        worksheet.Cell("K11").Value = data.p_e;
+
+                        //PB
+                        worksheet.Cell("K12").Value = data.p_b;
+
+                        //roe
+                        worksheet.Cell("K13").Value = data.roe;
+
+                        //Current Ratio
+                        worksheet.Cell("K14").Value = data.current_ratio;
+
+                        //Revenue Growth
+                        worksheet.Cell("K18").Value = data.revenue_growth;
+
+                        //Profit Growth
+                        worksheet.Cell("K19").Value = data.profit_growth;
+
+                        //Dividend Yield
+                        worksheet.Cell("K20").Value = data.dividend_yield;
 
                         //Save
                         workbook.SaveAs(selectedPath);
+
+                        // Add a delay after saving the workbook
+                        await Task.Delay(800); // Wait for 8 seconds
+
+                        // Enable the button after the delay
+                        btn_generate_click.Enabled = true;
                     }
                 }
             }
-            catch(Exception ex)
+            catch (WebException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
             }
@@ -421,6 +432,67 @@ namespace InvestHelper
             }
         }
 
+        public async Task ProcessTasksWithProgressUpdate(List<Task> tasks)
+        {
+            var progressManager = new ProgressManager(this, tasks.Count);
+
+            var runningTasks = tasks.ToList(); // Vytvořte kopii seznamu úkolů, protože budeme odstraňovat dokončené úkoly
+
+            while (runningTasks.Count > 0)
+            {
+                var completedTask = await Task.WhenAny(runningTasks);
+                runningTasks.Remove(completedTask);
+
+                progressManager.IncrementStep();
+            }
+        }
+
+        private class ProgressManager
+        {
+            private ViewController _viewController;
+            private double currentStep = 0;
+            private double totalSteps;
+            private double incrementValue;
+
+            public bool IsProcessing { get; private set; }
+
+            public ProgressManager(ViewController viewController, int totalSteps)
+            {
+                IsProcessing = true;
+                _viewController = viewController;
+                this.totalSteps = totalSteps;
+                this.incrementValue = 100.0 / totalSteps;
+            }
+
+            public void IncrementStep()
+            {
+                currentStep++;
+                UpdateProgressBar(incrementValue);
+            }
+
+            public void UpdateProgressBar(double incrementValue)
+            {
+                if (!IsProcessing) return;
+
+                _viewController.InvokeOnMainThread(() =>
+                {
+                    _viewController.progress_indicator.DoubleValue += incrementValue;
+                });
+
+                if (_viewController.progress_indicator.DoubleValue >= 100)
+                {
+
+                    _viewController.InvokeOnMainThread(() =>
+                    {
+                        _viewController.progress_indicator.Hidden = true;
+                        _viewController.progress_indicator.DoubleValue = 0;
+                    });
+
+                    IsProcessing = false;
+                }
+            }
+        }
+
         private class GetData
         {
             private ViewController _viewController;
@@ -438,16 +510,63 @@ namespace InvestHelper
             public double t_yeald_x_years = 0;
             public double eps = 0;
             public double growth_rate = 0;
+            public double p_e = 0;
+            public double p_b = 0;
+            public double dividend_yield = 0;
+            public double revenue_growth = 0;
+            public double profit_growth = 0;
+            public double current_ratio = 0;
+            public double roe = 0;
 
             public GetData(ViewController viewController)
             {
                 _viewController = viewController;
             }
 
+            /// <summary>
+            /// Initiates the download and processing of various financial data for a stock.
+            /// </summary>
+            /// <remarks>
+            /// This method aggregates multiple asynchronous tasks that fetch and process different financial metrics and data points for a stock.
+            /// The tasks include retrieving free cash flow, cash equivalents, growth estimates, total debt, statistical data, financials, bond data, return rate, and the latest stock information.
+            /// The tasks are processed concurrently using the `Task.WhenAll` method for efficiency.
+            /// Additionally, the progress of these tasks is tracked and updated using the `_viewController.ProcessTasksWithProgressUpdate` method.
+            /// </remarks>
+            public async Task DownloadAllData()
+            {
+                var tasks = new List<Task>
+                {
+                    free_cash_flow(),
+                    Cash_Equivalents(),
+                    growth_estimates(),
+                    Total_Debt(),
+                    Statistics(),
+                    Financials(),
+                    Bonds(),
+                    Return_Rate(),
+                    Get_last_info()
+                };
+
+                await _viewController.ProcessTasksWithProgressUpdate(tasks);
+                await Task.WhenAll(tasks);
+            }
+
+            /// <summary>
+            /// Retrieves the free cash flow values for the past 10 years for a stock from Macrotrends.
+            /// </summary>
+            /// <remarks>
+            /// This method navigates to the Macrotrends website for the specified stock ticker.
+            /// It extracts the free cash flow values for the past 10 years from the website.
+            /// The extracted year and corresponding free cash flow values are stored in the `years` and `freeCashFlowValues` class lists respectively.
+            /// If the expected elements are not found on the webpage or the values cannot be parsed, 
+            /// appropriate messages are logged.
+            /// After extracting the free cash flow values, the method proceeds to retrieve the cash and cash equivalents.
+            /// </remarks>
             public async Task free_cash_flow()
             {
                 var url = $"https://www.macrotrends.net/stocks/charts/{_viewController.stock.StringValue}/{_viewController.stock.StringValue}/free-cash-flow";
                 var web = new HtmlWeb();
+                web.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
                 var doc = await Task.Run(() => web.Load(url));
 
                 var tbody = doc.DocumentNode.SelectSingleNode("//tbody");
@@ -485,8 +604,7 @@ namespace InvestHelper
                     years.Reverse();
                     freeCashFlowValues.Reverse();
 
-                    _viewController.UpdateProgressBar(12.5); // Update Status
-                    await Cash_Cash_Equivalents();
+                    await Cash_Equivalents();
                 }
                 else
                 {
@@ -494,75 +612,108 @@ namespace InvestHelper
                 }
             }
 
-            public async Task Cash_Cash_Equivalents()
+            /// <summary>
+            /// Retrieves the cash and cash equivalents value for a stock from Macrotrends.
+            /// </summary>
+            /// <remarks>
+            /// This method navigates to the Macrotrends website for the specified stock ticker.
+            /// It extracts the cash and cash equivalents value from the website.
+            /// The extracted value is then stored in the `cash_cash_equivalents` class variable.
+            /// If the expected elements are not found on the webpage or the value cannot be parsed, 
+            /// appropriate messages are logged.
+            /// After extracting the cash and cash equivalents, the method proceeds to retrieve the total debt.
+            /// </remarks>
+            public async Task Cash_Equivalents()
             {
                 var url = $"https://www.macrotrends.net/stocks/charts/{_viewController.stock.StringValue}/{_viewController.stock.StringValue}/cash-on-hand";
                 var web = new HtmlWeb();
+                web.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
                 var doc = await Task.Run(() => web.Load(url));
 
-                // Search for the specific unordered list with the given style attribute
                 var ul = doc.DocumentNode.SelectSingleNode("//ul[@style='margin-top:10px;']");
-
-                if (ul != null)
-                {
-                    // Get the second list item
-                    var li = ul.SelectNodes("./li")[1];  // Index 1 for the second item
-
-                    if (li != null)
-                    {
-                        var strongNode = li.SelectSingleNode("./strong");
-                        if (strongNode != null)
-                        {
-                            string rawValue = strongNode.InnerText.Trim().Replace("$", "");
-                            double doubleValue;
-
-                            // Check if the value ends with 'B', 'M', or 'T'
-                            if (rawValue.EndsWith("B"))
-                            {
-                                doubleValue = double.Parse(rawValue.TrimEnd('B')) * 1000; // Convert billions to millions
-                            }
-                            else if (rawValue.EndsWith("M"))
-                            {
-                                doubleValue = double.Parse(rawValue.TrimEnd('M')); // Value is already in millions
-                            }
-                            else if (rawValue.EndsWith("T"))
-                            {
-                                doubleValue = double.Parse(rawValue.TrimEnd('T')) * 1000000; // Convert trillions to millions
-                            }
-                            else
-                            {
-                                doubleValue = double.Parse(rawValue); // Assume the number is in the correct format
-                            }
-
-                            cash_cash_equivalents = doubleValue;
-
-                            _viewController.UpdateProgressBar(25);//Update Status
-
-                            await Total_Debt();
-                        }
-                        else
-                        {
-                            Console.WriteLine("The 'strong' element was not found.");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("The 'li' item was not found.");
-                    }
-                }
-                else
+                if (ul == null)
                 {
                     Console.WriteLine("The unordered list 'ul' was not found.");
+                    return;
+                }
+
+                var li = ul.SelectNodes("./li")?.ElementAtOrDefault(1);
+                if (li == null)
+                {
+                    Console.WriteLine("The 'li' item was not found.");
+                    return;
+                }
+
+                var strongNode = li.SelectSingleNode("./strong");
+                if (strongNode == null)
+                {
+                    Console.WriteLine("The 'strong' element was not found.");
+                    return;
+                }
+
+                string rawValue = strongNode.InnerText.Trim().Replace("$", "");
+                cash_cash_equivalents = ConvertValueToMillions(rawValue);
+
+                await Total_Debt();
+            }
+
+            /// <summary>
+            /// Converts a string value to its equivalent in millions.
+            /// Handles values ending with 'B' (billions), 'M' (millions), 'T' (trillions), and '%' (percentage).
+            /// </summary>
+            /// <param name="value">The string value to convert.</param>
+            /// <returns>The converted value in millions or the original value if no specific format is detected.</returns>
+            private double ConvertValueToMillions(string value)
+            {
+                try
+                {
+                    // If the value ends with 'B', convert from billions to millions
+                    if (value.EndsWith("B"))
+                    {
+                        return double.Parse(value.TrimEnd('B')) * 1000;
+                    }
+                    // If the value ends with 'M', it's already in millions
+                    else if (value.EndsWith("M"))
+                    {
+                        return double.Parse(value.TrimEnd('M'));
+                    }
+                    // If the value ends with 'T', convert from trillions to millions
+                    else if (value.EndsWith("T"))
+                    {
+                        return double.Parse(value.TrimEnd('T')) * 1000000;
+                    }
+                    // If the value ends with '%', just parse the percentage value
+                    else if (value.EndsWith("%"))
+                    {
+                        return double.Parse(value.TrimEnd('%'));
+                    }
+                    // If no specific format is detected, assume the number is in the correct format
+                    else
+                    {
+                        return double.Parse(value);
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine($"Invalid format for value: {value}");
+                    return 0; // Return a default value or throw an exception
                 }
             }
 
+            /// <summary>
+            /// Retrieves the growth estimate for the next 5 years (per annum) for a given stock from Yahoo Finance.
+            /// </summary>
+            /// <remarks>
+            /// This method navigates to the Yahoo Finance analysis page for the specified stock and extracts the growth rate.
+            /// If the growth rate is found, it is stored in the 'growth_rate' variable. If not, appropriate messages are logged.
+            /// </remarks>
             public async Task growth_estimates()
             {
                 try
                 {
                     var url = string.Format("https://finance.yahoo.com/quote/{0}/analysis?p={0}", _viewController.stock.StringValue);
-
                     var web = new HtmlWeb();
+                    web.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
                     var doc = await Task.Run(() => web.Load(url));
 
                     var row = doc.DocumentNode.SelectSingleNode("//tr[td/span[text()='Next 5 Years (per annum)']]");
@@ -594,8 +745,6 @@ namespace InvestHelper
                     {
                         Console.WriteLine("Row with 'Next 5 Years (per annum)' not found.");
                     }
-
-                    _viewController.UpdateProgressBar(0);//Update Status
                 }
                 catch (Exception ex)
                 {
@@ -603,10 +752,19 @@ namespace InvestHelper
                 }
             }
 
+            /// <summary>
+            /// Retrieves the total debt for a given stock from Yahoo Finance's balance sheet page.
+            /// </summary>
+            /// <remarks>
+            /// This method navigates to the Yahoo Finance balance sheet page for the specified stock and extracts the total debt value.
+            /// If the total debt value is found, it is stored in the 'total_debt' variable. If not, appropriate messages are logged.
+            /// Additionally, after retrieving the total debt, the method calls 'Statistics' to fetch the number of outstanding shares.
+            /// </remarks>
             public async Task Total_Debt()
             {
                 var url = string.Format("https://finance.yahoo.com/quote/{0}/balance-sheet?p={0}", _viewController.stock.StringValue);
                 var web = new HtmlWeb();
+                web.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
                 var doc = await Task.Run(() => web.Load(url));
 
                 // Search for the specific div containing the text "Total Debt"
@@ -630,9 +788,7 @@ namespace InvestHelper
 
                         total_debt = (int)doubleValue;
 
-                        _viewController.UpdateProgressBar(37.5); // Update Status
-
-                        await Shares_Outstanding();
+                        await Statistics();
                     }
                     else
                     {
@@ -645,55 +801,92 @@ namespace InvestHelper
                 }
             }
 
-            public async Task Shares_Outstanding()
+            /// <summary>
+            /// Retrieves key financial statistics for a given stock from Yahoo Finance's key statistics page.
+            /// </summary>
+            /// <remarks>
+            /// This method navigates to the Yahoo Finance key statistics page for the specified stock and extracts various financial metrics.
+            /// The metrics include Shares Outstanding, Trailing P/E, Price/Book, Forward Annual Dividend Yield, Quarterly Revenue Growth, 
+            /// Quarterly Earnings Growth, Current Ratio, and Return on Equity.
+            /// Each metric is stored in its respective variable if found. If a particular metric is not found on the page, 
+            /// an appropriate message is logged.
+            /// </remarks>
+            public async Task Statistics()
             {
                 var url = string.Format("https://finance.yahoo.com/quote/{0}/key-statistics?p={0}", _viewController.stock.StringValue);
                 var web = new HtmlWeb();
+                web.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
                 var doc = await Task.Run(() => web.Load(url));
 
-                // Find the specific div that contains the text "Shares Outstanding"
-                var sharesOutstandingRow = doc.DocumentNode.SelectSingleNode("//td[span='Shares Outstanding']/following-sibling::td");
+                // Define the row titles you want to extract
+                var rowTitles = new List<string> { "Shares Outstanding", "Trailing P/E", "Price/Book", "Forward Annual Dividend Yield",
+                    "Quarterly Revenue Growth", "Quarterly Earnings Growth", "Current Ratio", "Return on Equity" };
 
-                if (sharesOutstandingRow != null)
+                foreach (var title in rowTitles)
                 {
-                    string rawValue = sharesOutstandingRow.InnerText.Trim();
-                    double doubleValue;
+                    var col = doc.DocumentNode.SelectSingleNode($"//td[span[text()='{title}']]");
+                    if (col != null)
+                    {
+                        var valueNode = col.NextSibling;
+                        if (valueNode != null)
+                        {
+                            string rawValue = valueNode.InnerText.Trim();
+                            double convertedValue = ConvertValueToMillions(rawValue);
 
-                    // Check if the value ends with 'B', 'M', or 'T'
-                    if (rawValue.EndsWith("B"))
-                    {
-                        doubleValue = double.Parse(rawValue.TrimEnd('B')) * 1000; // Convert billions to millions
-                    }
-                    else if (rawValue.EndsWith("M"))
-                    {
-                        doubleValue = double.Parse(rawValue.TrimEnd('M')); // Value is already in millions
-                    }
-                    else if (rawValue.EndsWith("T"))
-                    {
-                        doubleValue = double.Parse(rawValue.TrimEnd('T')) * 1000000; // Convert trillions to millions
+                            switch (title)
+                            {
+                                case "Shares Outstanding":
+                                    shares_outstanding = convertedValue;
+                                    break;
+                                case "Trailing P/E":
+                                    p_e = convertedValue / 100;
+                                    break;
+                                case "Price/Book":
+                                    p_b = convertedValue / 100;
+                                    break;
+                                case "Forward Annual Dividend Yield":
+                                    dividend_yield = convertedValue;
+                                    break;
+                                case "Quarterly Revenue Growth":
+                                    revenue_growth = convertedValue;
+                                    break;
+                                case "Quarterly Earnings Growth":
+                                    profit_growth = convertedValue;
+                                    break;
+                                case "Current Ratio":
+                                    current_ratio = convertedValue;
+                                    break;
+                                case "Return on Equity":
+                                    roe = convertedValue / 100;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No value found for '{title}'.");
+                        }
                     }
                     else
                     {
-                        doubleValue = double.Parse(rawValue); // Assume the number is in the correct format
+                        Console.WriteLine($"Row with '{title}' not found.");
                     }
-
-                    shares_outstanding = (int)doubleValue;
-
-                    _viewController.UpdateProgressBar(50);//Update Status
-
-                    await Financials();
-
-                }
-                else
-                {
-                    Console.WriteLine("Div with 'Shares Outstanding' not found.");
                 }
             }
 
+            /// <summary>
+            /// Retrieves key financial data for a given stock from Yahoo Finance's financials page.
+            /// </summary>
+            /// <remarks>
+            /// This method navigates to the Yahoo Finance financials page for the specified stock and extracts various financial metrics.
+            /// The metrics include Interest Expense, Tax Provision, and Pretax Income.
+            /// Each metric is stored in its respective variable if found. If a particular metric is not found on the page, 
+            /// an appropriate message is logged. After extracting the metrics, the method proceeds to retrieve bond information.
+            /// </remarks>
             public async Task Financials()
             {
                 var url = string.Format("https://finance.yahoo.com/quote/{0}/financials?p={0}", _viewController.stock.StringValue);
                 var web = new HtmlWeb();
+                web.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
                 var doc = await Task.Run(() => web.Load(url));
 
                 // Define the row titles you want to extract
@@ -747,14 +940,22 @@ namespace InvestHelper
                         Console.WriteLine("Div with 'Interest Expense' not found.");
                     }
                 }
-
-                _viewController.UpdateProgressBar(62.5);//Update Status
                 await Bonds();
             }
 
+            /// <summary>
+            /// Retrieves the bond yield for a specific bond from Yahoo Finance's bonds page.
+            /// </summary>
+            /// <remarks>
+            /// This method navigates to the Yahoo Finance bonds page and extracts the bond yield for a specific bond.
+            /// The bond yield is then stored in the variable 't_yeald_x_years' if successfully extracted.
+            /// If the bond yield is not found or cannot be parsed, an appropriate message is logged.
+            /// After extracting the bond yield, the method proceeds to retrieve the return rate.
+            /// </remarks>
             public async Task Bonds()
             {
                 var web = new HtmlWeb();
+                web.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
                 var doc = await Task.Run(() => web.Load("https://finance.yahoo.com/bonds"));
 
                 var nodes = doc.DocumentNode.SelectNodes("//td[@aria-label='Last Price']/fin-streamer[@data-field='regularMarketPrice']");
@@ -779,8 +980,6 @@ namespace InvestHelper
                     {
                         Console.WriteLine("Node at index 2 not found.");
                     }
-
-                    _viewController.UpdateProgressBar(75); // Update Status
                     await Return_Rate();
                 }
                 else
@@ -789,9 +988,19 @@ namespace InvestHelper
                 }
             }
 
+            /// <summary>
+            /// Retrieves the annual return rate for the S&P 500 from the Macrotrends website.
+            /// </summary>
+            /// <remarks>
+            /// This method navigates to the Macrotrends website that provides historical annual returns for the S&P 500.
+            /// It extracts the most recent annual return rate and stores it in the 'return_rate' variable.
+            /// If the return rate is not found or cannot be parsed, an appropriate message is logged.
+            /// After extracting the return rate, the method proceeds to retrieve the last available information.
+            /// </remarks>
             public async Task Return_Rate()
             {
                 var web = new HtmlWeb();
+                web.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
                 var doc = await Task.Run(() => web.Load("https://www.macrotrends.net/2526/sp-500-historical-annual-returns"));
 
                 var tbody = doc.DocumentNode.SelectSingleNode("//tbody");
@@ -822,7 +1031,6 @@ namespace InvestHelper
                     }
 
                     await Get_last_info();
-                    _viewController.UpdateProgressBar(87.5);//Update Status
                 }
                 else
                 {
@@ -831,14 +1039,24 @@ namespace InvestHelper
 
             }
 
+            /// <summary>
+            /// Retrieves specific financial information for a stock from Yahoo Finance.
+            /// </summary>
+            /// <remarks>
+            /// This method navigates to the Yahoo Finance website for the specified stock ticker.
+            /// It extracts key financial metrics such as "Market Cap", "Beta (5Y Monthly)", and "EPS (TTM)".
+            /// The extracted values are then stored in the respective class variables.
+            /// If a particular metric is not found or cannot be parsed, an appropriate message is logged.
+            /// </remarks>
             public async Task Get_last_info()
             {
                 var url = string.Format("https://finance.yahoo.com/quote/{0}?p={0}&.tsrc=fin-srch", _viewController.stock.StringValue);
                 var web = new HtmlWeb();
+                web.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
                 var doc = await Task.Run(() => web.Load(url));
 
                 // Define the row titles you want to extract
-                var rowTitles = new List<string> { "Market Cap", "Beta (5Y Monthly)" , "EPS (TTM)" };
+                var rowTitles = new List<string> { "Market Cap", "Beta (5Y Monthly)", "EPS (TTM)" };
 
                 foreach (var title in rowTitles)
                 {
@@ -851,46 +1069,24 @@ namespace InvestHelper
                         if (valueNode != null)
                         {
                             string rawValue = valueNode.InnerText.Trim();
-                            char multiplierChar = rawValue.Last(); // Get the last character (B, M, T)
 
-                            // Remove the last character and any decimal comma
-                            rawValue = Regex.Replace(rawValue, @"[.](?=\d+$)|[A-Za-z]$", string.Empty);
-
-                            if (double.TryParse(rawValue, out double value))
+                            switch (title)
                             {
-                                switch (title)
-                                {
-                                    case "Market Cap":
-                                        switch (multiplierChar)
-                                        {
-                                            case 'B':
-                                                market_cap = value * 1000; // Convert billions to millions
-                                                break;
-                                            case 'M':
-                                                market_cap = value; // Value is already in millions
-                                                break;
-                                            case 'T':
-                                                market_cap = value * 1000000; // Convert trillions to millions
-                                                break;
-                                            default:
-                                                market_cap = value; // Assume the number is in the correct format
-                                                break;
-                                        }
-                                        break;
-                                    case "Beta (5Y Monthly)":
-                                        beta = value / 100;
-                                        break;
-
-                                    case "EPS (TTM)":
-                                        eps = value / 100;
-                                        break;
-                                }
-                                _viewController.UpdateProgressBar(100);//Update Status
-                            }
-                            else
-                            {
-                                Console.WriteLine($"Failed to convert the value for '{title}' to a number.");
-
+                                case "Market Cap":
+                                    market_cap = ConvertValueToMillions(rawValue);
+                                    break;
+                                case "Beta (5Y Monthly)":
+                                    if (double.TryParse(rawValue, out double betaValue))
+                                    {
+                                        beta = betaValue;
+                                    }
+                                    break;
+                                case "EPS (TTM)":
+                                    if (double.TryParse(rawValue, out double epsValue))
+                                    {
+                                        eps = epsValue;
+                                    }
+                                    break;
                             }
                         }
                         else

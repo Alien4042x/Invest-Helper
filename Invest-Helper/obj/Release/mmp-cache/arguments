@@ -1,41 +1,41 @@
-# Version: 9.3.0. (xcode14.3: 97731c92c)
-/Library/Frameworks/Xamarin.Mac.framework/Versions/9.3.0.6/lib/mmp/mmp.exe \
-	/Library/Frameworks/Xamarin.Mac.framework/Versions/9.3.0.6/bin/../lib/mmp/mmp.exe \
+# Version: 9.3.0. (xcode14.3: 9d266025e)
+/Library/Frameworks/Xamarin.Mac.framework/Versions/9.3.0.18/lib/mmp/mmp.exe \
+	/Library/Frameworks/Xamarin.Mac.framework/Versions/9.3.0.18/bin/../lib/mmp/mmp.exe \
 	--registrar:dynamic \
 	'/target-framework:Xamarin.Mac,Version=v2.0,Profile=Mobile' \
 	--http-message-handler=HttpClientHandler \
-	--cache=/Users/alien4042x/Projects/Invest-Helper/Invest-Helper/obj/Release/mmp-cache \
-	--root-assembly=/Users/alien4042x/Projects/Invest-Helper/Invest-Helper/bin/Release/Invest-Helper.exe \
+	--cache=/Users/alien4042x1/Projects/Invest-Helper/Invest-Helper/obj/Release/mmp-cache \
+	--root-assembly=/Users/alien4042x1/Projects/Invest-Helper/Invest-Helper/bin/Release/Invest-Helper.exe \
 	--sdkroot=/Applications/Xcode.app/Contents/Developer \
 	--targetver=10.12 \
 	-q \
 	-q \
 	-q \
 	-q \
-	/output:/Users/alien4042x/Projects/Invest-Helper/Invest-Helper/bin/Release/ \
+	/output:/Users/alien4042x1/Projects/Invest-Helper/Invest-Helper/bin/Release/ \
 	/name:Invest-Helper \
 	/abi:x86_64 \
 	/nolink \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/ClosedXML.0.102.1/lib/netstandard2.1/ClosedXML.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/DocumentFormat.OpenXml.2.20.0/lib/netstandard2.0/DocumentFormat.OpenXml.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/ExcelNumberFormat.1.1.0/lib/netstandard2.0/ExcelNumberFormat.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/HtmlAgilityPack.1.11.52/lib/netstandard2.0/HtmlAgilityPack.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/Irony.1.2.0/lib/netstandard2.0/Irony.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/ClosedXML.0.102.1/lib/netstandard2.1/ClosedXML.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/DocumentFormat.OpenXml.2.20.0/lib/netstandard2.0/DocumentFormat.OpenXml.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/ExcelNumberFormat.1.1.0/lib/netstandard2.0/ExcelNumberFormat.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/Invest-Helper/packages/HtmlAgilityPack.1.11.54/lib/netstandard2.0/HtmlAgilityPack.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/Irony.1.2.0/lib/netstandard2.0/Irony.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/mscorlib.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/SixLabors.Fonts.1.0.0/lib/netstandard2.1/SixLabors.Fonts.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/SixLabors.Fonts.1.0.0/lib/netstandard2.1/SixLabors.Fonts.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/Facades/System.Buffers.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/System.Core.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/System.Data.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/System.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/Facades/System.Drawing.Common.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/System.IO.Compression.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/System.IO.Packaging.7.0.0/lib/netstandard2.0/System.IO.Packaging.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/System.IO.Packaging.7.0.0/lib/netstandard2.0/System.IO.Packaging.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/Facades/System.Memory.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/System.Net.Http.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/System.Runtime.CompilerServices.Unsafe.6.0.0/lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/System.Runtime.CompilerServices.Unsafe.6.0.0/lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/System.Xml.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/Xamarin.Mac.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/XLParser.1.7.0/lib/netstandard2.0/XLParser.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/XLParser.1.7.2/lib/netstandard2.0/XLParser.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/Facades/Microsoft.Win32.Primitives.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/Facades/Microsoft.Win32.Registry.AccessControl.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/Facades/Microsoft.Win32.Registry.dll \
@@ -176,14 +176,14 @@
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/Facades/System.Xml.XPath.XDocument.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/Facades/System.Xml.XPath.XmlDocument.dll \
 	/reference:/Library/Frameworks/Xamarin.Mac.framework/Versions/Current/lib/mono/Xamarin.Mac/Facades/System.Xml.Xsl.Primitives.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/ClosedXML.0.102.1/lib/netstandard2.1/ClosedXML.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/DocumentFormat.OpenXml.2.20.0/lib/netstandard2.0/DocumentFormat.OpenXml.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/ExcelNumberFormat.1.1.0/lib/netstandard2.0/ExcelNumberFormat.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/HtmlAgilityPack.1.11.52/lib/netstandard2.0/HtmlAgilityPack.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/Irony.1.2.0/lib/netstandard2.0/Irony.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/SixLabors.Fonts.1.0.0/lib/netstandard2.1/SixLabors.Fonts.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/System.IO.Packaging.7.0.0/lib/netstandard2.0/System.IO.Packaging.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/System.Runtime.CompilerServices.Unsafe.6.0.0/lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll \
-	/reference:/Users/alien4042x/Projects/Invest-Helper/packages/XLParser.1.7.0/lib/netstandard2.0/XLParser.dll \
-	@/Users/alien4042x/Projects/Invest-Helper/Invest-Helper/obj/Release/response-file.rsp \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/ClosedXML.0.102.1/lib/netstandard2.1/ClosedXML.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/DocumentFormat.OpenXml.2.20.0/lib/netstandard2.0/DocumentFormat.OpenXml.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/ExcelNumberFormat.1.1.0/lib/netstandard2.0/ExcelNumberFormat.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/Invest-Helper/packages/HtmlAgilityPack.1.11.54/lib/netstandard2.0/HtmlAgilityPack.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/Irony.1.2.0/lib/netstandard2.0/Irony.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/SixLabors.Fonts.1.0.0/lib/netstandard2.1/SixLabors.Fonts.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/System.IO.Packaging.7.0.0/lib/netstandard2.0/System.IO.Packaging.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/System.Runtime.CompilerServices.Unsafe.6.0.0/lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll \
+	/reference:/Users/alien4042x1/Projects/Invest-Helper/packages/XLParser.1.7.2/lib/netstandard2.0/XLParser.dll \
+	@/Users/alien4042x1/Projects/Invest-Helper/Invest-Helper/obj/Release/response-file.rsp \
 	--registrar:dynamic \

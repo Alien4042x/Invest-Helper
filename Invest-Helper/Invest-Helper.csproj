@@ -29,6 +29,10 @@
     <UseSGen>true</UseSGen>
     <UseRefCounting>true</UseRefCounting>
     <LinkMode>None</LinkMode>
+    <CodesignProvision></CodesignProvision>
+    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+    <EnableCodeSigning>False</EnableCodeSigning>
+    <XamMacArch>x86_64</XamMacArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,6 +49,10 @@
     <LinkMode>None</LinkMode>
     <MonoBundlingExtraArgs>--registrar:dynamic</MonoBundlingExtraArgs>
     <XamMacArch>x86_64</XamMacArch>
+    <CodesigningKey>Mac Developer</CodesigningKey>
+    <CodesignProvision></CodesignProvision>
+    <PackageSigningKey>3rd Party Mac Developer Installer</PackageSigningKey>
+    <EnableCodeSigning>False</EnableCodeSigning>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

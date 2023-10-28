@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <_PostProcessingItem Include="Invest-Helper.app/Contents/MacOS/Invest-Helper">
+      <BCSymbolMapName>Invest-Helper.bcsymbolmap</BCSymbolMapName>
+      <NoDSymUtil>true</NoDSymUtil>
+      <dSYMSourcePathExists>false</dSYMSourcePathExists>
+      <NoSymbolStrip>true</NoSymbolStrip>
+      <dSYMInfoPlistRelativePath>Invest-Helper.app.dSYM\Contents\Info.plist</dSYMInfoPlistRelativePath>
+      <SymbolFile>/Users/alien4042x1/Projects/Invest-Helper/Invest-Helper/obj/Release/mtouch-symbols.list</SymbolFile>
+      <DSymName>Invest-Helper.app.dSYM</DSymName>
+      <SourceProjectPath>/Users/alien4042x1/Projects/Invest-Helper/Invest-Helper</SourceProjectPath>
+    </_PostProcessingItem>
+  </ItemGroup>
+</Project>
